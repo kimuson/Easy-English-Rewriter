@@ -141,18 +141,26 @@ All AI runs on-device. The extension makes **no external network requests**.
 CI/CD runs on **GitHub Actions**:
 
 - **CI** (`.github/workflows/ci.yml`) — on every push/PR: checks JS syntax, validates
-  `manifest.json` and its referenced files, runs `web-ext lint`, and uploads a built `.zip`
-  artifact.
+  `manifest.json` and its referenced files, and uploads a built `.zip` artifact.
 - **Release** (`.github/workflows/release.yml`) — on pushing a tag `vX.Y.Z` that matches
   `manifest.json` `version`: builds the package and creates a GitHub Release with the `.zip`
   attached.
 
-Helper scripts (also runnable locally):
+Run the full CI check locally before committing/pushing:
+
+```bash
+bash scripts/ci-local.sh    # JS syntax + manifest validation + build (same as CI)
+```
+
+Individual helpers:
 
 ```bash
 node scripts/validate.mjs   # validate manifest + referenced files
 bash scripts/build-zip.sh   # build dist/easy-english-rewriter-<version>.zip
 ```
+
+A Claude Code skill at `.claude/skills/run-ci/` instructs the assistant to run
+`scripts/ci-local.sh` before every commit/push.
 
 To cut a release: bump `version` in `manifest.json`, commit, then:
 
