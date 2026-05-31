@@ -1,0 +1,46 @@
+# ---- OS ----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---- Editors / IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ---- Node / tooling (in case build tooling is added later) ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.cache/
+dist/
+build/
+
+# ---- Logs / temp ----
+*.log
+*.tmp
+tmp/
+
+# ---- Packaging artifacts ----
+# Zips produced for Chrome Web Store uploads
+*.zip
+# Private signing key Chrome generates when packing a .crx
+*.pem
+web-ext-artifacts/
+
+# ---- Env / secrets ----
+.env
+.env.*
+!.env.example
