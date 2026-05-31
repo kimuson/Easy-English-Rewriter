@@ -85,6 +85,7 @@ so they pick up the new content script.
 | `popup.html` / `popup.js` / `popup.css` | Toolbar popup: AI status and settings |
 | `icons/` | Extension icons (16/48/128) |
 | `STORE.md` | Chrome Web Store listing text, permission justifications, privacy policy |
+| `TERMS.md` | Terms of Service |
 | `LICENSE` | MIT license |
 
 The rewriting behavior is controlled by `SYSTEM_PROMPT` and the `LEVELS` presets in
@@ -135,6 +136,8 @@ All AI runs on-device. The extension makes **no external network requests**.
 
 ---
 
-## License
+## Legal
 
-Released under the [MIT License](LICENSE). © 2026 Yuta Kimura, NEXASPARK.
+- **Source code license:** [MIT License](LICENSE) — © 2026 Yuta Kimura, NEXASPARK
+- **Terms of Service:** [TERMS.md](TERMS.md)
+- **Privacy Policy:** see [STORE.md](STORE.md#privacy-policy-host-this-at-a-public-url)
