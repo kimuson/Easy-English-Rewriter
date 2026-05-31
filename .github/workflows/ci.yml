@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check JavaScript syntax
+        run: |
+          set -e
+          for f in $(git ls-files '*.js' '*.mjs'); do
+            echo "node --check $f"
+            node --check "$f"
+          done
+
+      - name: Validate manifest and referenced files
+        run: node scripts/validate.mjs
+
+      - name: web-ext lint (informational)
+        continue-on-error: true
+        run: >
+          npx --yes web-ext@latest lint
+          --source-dir .
+          --warnings-as-errors=false
+          --ignore-files "*.md" ".github/**" "scripts/**" "dist/**"
+
+      - name: Build package
+        run: bash scripts/build-zip.sh
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-package
+          path: dist/*.zip
+          if-no-files-found: error

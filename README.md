@@ -136,6 +136,33 @@ All AI runs on-device. The extension makes **no external network requests**.
 
 ---
 
+## Development & releases
+
+CI/CD runs on **GitHub Actions**:
+
+- **CI** (`.github/workflows/ci.yml`) — on every push/PR: checks JS syntax, validates
+  `manifest.json` and its referenced files, runs `web-ext lint`, and uploads a built `.zip`
+  artifact.
+- **Release** (`.github/workflows/release.yml`) — on pushing a tag `vX.Y.Z` that matches
+  `manifest.json` `version`: builds the package and creates a GitHub Release with the `.zip`
+  attached.
+
+Helper scripts (also runnable locally):
+
+```bash
+node scripts/validate.mjs   # validate manifest + referenced files
+bash scripts/build-zip.sh   # build dist/easy-english-rewriter-<version>.zip
+```
+
+To cut a release: bump `version` in `manifest.json`, commit, then:
+
+```bash
+git tag v1.0.0 && git push origin v1.0.0
+```
+
+> Chrome Web Store publishing is **manual for the first release** (and currently for every
+> release). Auto-publishing to the store can be added later via the Web Store API.
+
 ## Legal
 
 - **Source code license:** [MIT License](LICENSE) — © 2026 Yuta Kimura, NEXASPARK

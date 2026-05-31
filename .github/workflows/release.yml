@@ -1,0 +1,41 @@
+name: Release
+
+# Trigger by pushing a tag like v1.0.0 (must match manifest.json "version").
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate manifest and referenced files
+        run: node scripts/validate.mjs
+
+      - name: Ensure tag matches manifest version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VER=$(node -p "require('./manifest.json').version")
+          echo "tag=$TAG manifest=$VER"
+          if [ "$TAG" != "$VER" ]; then
+            echo "::error::Tag ($TAG) does not match manifest version ($VER). Bump manifest.json or fix the tag."
+            exit 1
+          fi
+
+      - name: Build package
+        run: bash scripts/build-zip.sh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
