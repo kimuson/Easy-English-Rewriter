@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Pre-push hook: blocks the push if local CI checks fail.
+# Enabled via core.hooksPath=.githooks (run scripts/setup-hooks.sh once after cloning).
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+echo "[pre-push] Running local CI checks before push…"
+
+if bash "${ROOT}/scripts/ci-local.sh"; then
+  echo "[pre-push] CI passed — proceeding with push."
+  exit 0
+else
+  echo "[pre-push] CI FAILED — push aborted. Fix the issues above, then push again."
+  echo "[pre-push] (To bypass in an emergency: git push --no-verify)"
+  exit 1
+fi

@@ -159,7 +159,18 @@ node scripts/validate.mjs   # validate manifest + referenced files
 bash scripts/build-zip.sh   # build dist/easy-english-rewriter-<version>.zip
 ```
 
-A Claude Code skill at `.claude/skills/run-ci/` instructs the assistant to run
+### Git hook (hard enforcement)
+
+A version-controlled **pre-push hook** runs `scripts/ci-local.sh` and blocks the push if it
+fails. `core.hooksPath` is not copied on clone, so enable it once after cloning:
+
+```bash
+bash scripts/setup-hooks.sh   # sets core.hooksPath=.githooks
+```
+
+After that, every `git push` runs CI first. To bypass in an emergency: `git push --no-verify`.
+
+A Claude Code skill at `.claude/skills/run-ci/` additionally instructs the assistant to run
 `scripts/ci-local.sh` before every commit/push.
 
 To cut a release: bump `version` in `manifest.json`, commit, then:
