@@ -25,6 +25,27 @@ const LEVELS = {
 let sessionPromise = null;
 const translatorCache = {};
 
+// ---- Keep the service worker (and the warmed AI session) alive ----
+// In MV3 the service worker is torn down after ~30s of inactivity, which would
+// destroy the in-memory AI session and force the model to reload from disk on the
+// next request. Once a session is warmed, a periodic alarm keeps the worker awake
+// so the model loads only once (on first use) instead of every time.
+const KEEPALIVE_ALARM = "easy-english-keepalive";
+
+function startKeepAlive() {
+  try {
+    // 0.5 min (30s) is the shortest period Chrome allows for a packed extension.
+    chrome.alarms.create(KEEPALIVE_ALARM, { periodInMinutes: 0.5 });
+  } catch (_) {}
+}
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name !== KEEPALIVE_ALARM) return;
+  // Handling an event resets the idle timer; awaiting an async API call extends
+  // the worker's life a little further so it stays warm between user requests.
+  chrome.runtime.getPlatformInfo(() => {});
+});
+
 // Support both the current and legacy shapes of the built-in AI API.
 function getLanguageModel() {
   if (typeof LanguageModel !== "undefined") return LanguageModel;
@@ -91,7 +112,9 @@ async function getSession(monitor) {
       let lastErr;
       for (const cfg of attempts) {
         try {
-          return await LM.create(cfg);
+          const session = await LM.create(cfg);
+          startKeepAlive(); // keep the worker alive so this session is reused
+          return session;
         } catch (e) {
           lastErr = e;
         }

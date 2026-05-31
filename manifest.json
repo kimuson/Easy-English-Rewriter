@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Rewrites English text on any page into simpler, easier-to-read English using Chrome's built-in AI (Gemini Nano).",
   "minimum_chrome_version": "138",
-  "permissions": ["storage", "contextMenus"],
+  "permissions": ["storage", "contextMenus", "alarms"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
