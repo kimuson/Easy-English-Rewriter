@@ -185,5 +185,7 @@ git tag v1.0.0 && git push origin v1.0.0
 ## Legal
 
 - **Source code license:** [MIT License](LICENSE) — © 2026 Yuta Kimura, NEXASPARK
-- **Terms of Service:** [TERMS.md](TERMS.md)
-- **Privacy Policy:** see [STORE.md](STORE.md#privacy-policy-host-this-at-a-public-url)
+- **Privacy Policy:** https://kimuson.github.io/Easy-English-Rewriter/ (source: [`docs/index.html`](docs/index.html))
+- **Terms of Service:** https://kimuson.github.io/Easy-English-Rewriter/terms.html (source: [`docs/terms.html`](docs/terms.html))
+
+The privacy/terms pages are published with GitHub Pages from the `docs/` folder on `main`.

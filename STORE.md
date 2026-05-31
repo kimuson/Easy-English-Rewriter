@@ -59,7 +59,13 @@ Paste these into the "Permission justification" fields during submission.
 
 ---
 
-## Privacy Policy (host this at a public URL)
+## Privacy Policy
+
+**Published at:** https://kimuson.github.io/Easy-English-Rewriter/ (use this URL in the
+Dashboard's "Privacy policy URL" field). Terms of Service:
+https://kimuson.github.io/Easy-English-Rewriter/terms.html
+
+The text below is the source of that page (also in `docs/index.html`):
 
 > **Easy English Rewriter — Privacy Policy**
 > _Last updated: 2026-05-31_
