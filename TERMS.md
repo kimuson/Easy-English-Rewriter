@@ -87,8 +87,8 @@ Any disputes shall be subject to the exclusive jurisdiction of the courts locate
 
 ## 12. Contact
 
-Questions about these Terms: <your-support-email@example.com>
+Questions about these Terms: <yuta.kimura@nexaspark.org>
 
-> Before publishing, replace the contact email, and confirm the governing-law jurisdiction
-> (Section 11) is correct for your situation. This document is a template, not legal advice;
-> consider having it reviewed by a qualified professional.
+> Before publishing, confirm the governing-law jurisdiction (Section 11) is correct for your
+> situation. This document is a template, not legal advice; consider having it reviewed by a
+> qualified professional.

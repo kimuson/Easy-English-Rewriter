@@ -87,9 +87,9 @@ Paste these into the "Permission justification" fields during submission.
 > AI and Translator). Their behavior is governed by Google's own policies. We share nothing
 > with any third party.
 >
-> **Contact.** <your-support-email@example.com>
+> **Contact.** <yuta.kimura@nexaspark.org>
 
-> Replace the contact email before publishing.
+> Contact email is set. Host this policy text at a public URL and link it in the listing.
 
 ---
 
@@ -115,7 +115,7 @@ Paste these into the "Permission justification" fields during submission.
 ## Pre-submission checklist
 
 - [ ] Register a Chrome Web Store developer account ($5 one-time fee)
-- [ ] Replace the contact email in the Privacy Policy and host it at a public URL
+- [ ] Host the Privacy Policy (and Terms) text at a public URL and link it in the listing
 - [ ] Prepare a 128×128 icon (current gradient icon works) and 1–5 screenshots (1280×800)
 - [ ] Bump `version` in manifest.json for each release
 - [ ] Zip the extension folder (exclude this STORE.md and README.md if desired) and upload
